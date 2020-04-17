@@ -150,7 +150,25 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="lcd_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lcd_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="reflect_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="reflect_driver.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

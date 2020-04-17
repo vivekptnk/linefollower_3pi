@@ -3,22 +3,32 @@
  *  Author: vivek
  */
 
-#include <pololu/3pi.h>
+#include "lcd_driver.h"
+#include "pwm_driver.h"
+#include "reflect_driver.h"
+#include <avr/io.h>
+
 
 int main()
 {
-	play_from_program_space(PSTR(">g32>>c32"));  // Play welcoming notes.
-
-	while(1)
-	{
-		// Print battery voltage (in mV) on the LCD.
-		clear();
-		print_long(read_battery_millivolts_3pi());
-
-		red_led(1);     // Turn on the red LED.
-		delay_ms(200);  // Wait for 200 ms.
-
-		red_led(0);     // Turn off the red LED.
-		delay_ms(200);  // Wait for 200 ms.
+	configure_motors();
+	configure_reflectance_sensors();
+	
+	while(1){
+		configure_reflectance_sensors();
+		
+		if (read_reflectance_sensors() > 16) {
+			pwm_right_motor(5);
+			pwm_left_motor(35);
+		} else if (read_reflectance_sensors()<2){
+			pwm_right_motor(35);
+			pwm_left_motor(5);
+		} else {
+			pwm_right_motor(25);
+			pwm_left_motor(25);
+		}
 	}
+	
+	return 0;
+
 }
